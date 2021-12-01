@@ -1,15 +1,15 @@
 <?php
 // Get Data
-$puzzleInput = file_get_contents(__DIR__ . "/1.txt");
+$puzzleInput = file_get_contents(__DIR__ . "/../puzzle_input/1.txt");
 $puzzleInput = explode("\n", $puzzleInput);
 
 
 // Part 1
 $increaseCounter = 0;
-$lastInput = (int)$puzzleInput[0];
+$lastInput = $puzzleInput[0];
 
 foreach ($puzzleInput as $input) {
-    if((int)$input > $lastInput) {
+    if($input > $lastInput) {
         $increaseCounter++;
     }
     $lastInput = $input;
@@ -17,7 +17,9 @@ foreach ($puzzleInput as $input) {
 
 echo $increaseCounter;
 
+
 echo chr(10);
+
 
 // Part 2
 $increaseCounter = 0;
