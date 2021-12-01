@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Day {
-    abstract int Part1(String[] puzzleInput);
+    abstract int part1(String[] puzzleInput);
 
-    abstract int Part2(String[] puzzleInput);
+    abstract int part2(String[] puzzleInput);
 
     protected static String[] readFile(String path) throws IOException {
         List<String> lines = new ArrayList<String>();
@@ -36,8 +36,8 @@ public abstract class Day {
         try {
             String[] puzzleInput = readFile("./../puzzle_input/" + day + ".txt");
             System.out.println("Day: " + day);
-            System.out.println("Part 1: " + this.Part1(puzzleInput));
-            System.out.println("Part 2: " + this.Part2(puzzleInput));
+            System.out.println("Part 1: " + this.part1(puzzleInput));
+            System.out.println("Part 2: " + this.part2(puzzleInput));
         } catch (IOException e) {
             e.printStackTrace();
         }

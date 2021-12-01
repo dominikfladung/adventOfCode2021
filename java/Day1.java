@@ -1,6 +1,6 @@
 public class Day1 extends Day {
     @Override
-    int Part1(String[] puzzleInput) {
+    int part1(String[] puzzleInput) {
         int counter = 0;
         int[] numbers = ToInt(puzzleInput);
 
@@ -14,7 +14,7 @@ public class Day1 extends Day {
     }
 
     @Override
-    int Part2(String[] puzzleInput) {
+    int part2(String[] puzzleInput) {
         int counter = 0;
         int[] numbers = ToInt(puzzleInput);
 

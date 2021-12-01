@@ -1,13 +1,13 @@
 public class Day2 extends Day {
 
     @Override
-    int Part1(String[] puzzleInput) {
+    int part1(String[] puzzleInput) {
         // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
-    int Part2(String[] puzzleInput) {
+    int part2(String[] puzzleInput) {
         // TODO Auto-generated method stub
         return 0;
     }
