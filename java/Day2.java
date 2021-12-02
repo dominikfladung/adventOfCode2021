@@ -9,15 +9,15 @@ public class Day2 extends Day {
             String[] split = line.split(" ");
             int units = Integer.parseInt(split[1]);
             String direction = split[0].trim();
-            
-            if(direction.equals("forward")) {
+
+            if (direction.equals("forward")) {
                 horizontalPosition += units;
-            } else if(direction.equals("up")) {
+            } else if (direction.equals("up")) {
                 depth -= units;
-            } else if(direction.equals("down")) {
+            } else if (direction.equals("down")) {
                 depth += units;
             }
-        }        
+        }
 
         return depth * horizontalPosition;
     }
@@ -32,20 +32,21 @@ public class Day2 extends Day {
             String[] split = line.split(" ");
             int units = Integer.parseInt(split[1]);
             String direction = split[0].trim();
-            
-            if(direction.equals("forward")) {
+
+            if (direction.equals("forward")) {
                 horizontalPosition += units;
                 depth += units * aim;
-            } else if(direction.equals("up")) {
+            } else if (direction.equals("up")) {
                 aim -= units;
-            } else if(direction.equals("down")) {
+            } else if (direction.equals("down")) {
                 aim += units;
             } else {
                 System.out.println("?" + direction);
             }
 
-            //System.out.println("horizontalPosition: " + horizontalPosition + " depth: " + depth + " aim: " + aim);
-        }        
+            // System.out.println("horizontalPosition: " + horizontalPosition + " depth: " +
+            // depth + " aim: " + aim);
+        }
 
         return depth * horizontalPosition;
     }
