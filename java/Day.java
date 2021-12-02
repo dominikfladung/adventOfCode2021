@@ -5,6 +5,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public abstract class Day {
     abstract int part1(String[] puzzleInput);
@@ -36,9 +41,14 @@ public abstract class Day {
         try {
             String[] puzzleInput = readFile("./../puzzle_input/" + day + ".txt");
             System.out.println("Day: " + day);
-            System.out.println("Part 1: " + this.part1(puzzleInput));
-            System.out.println("Part 2: " + this.part2(puzzleInput));
-        } catch (IOException e) {
+            ExecutorService executorService = Executors.newFixedThreadPool(2);
+            Future<Integer> futurePart1 = executorService.submit(() -> this.part1(puzzleInput));
+            Future<Integer> futurePart2 = executorService.submit(() -> this.part2(puzzleInput));
+            executorService.shutdown();
+
+            System.out.println("Part 1: " + futurePart1.get());
+            System.out.println("Part 2: " + futurePart2.get());
+        } catch (ExecutionException | InterruptedException | IOException e) {
             e.printStackTrace();
         }
     }
