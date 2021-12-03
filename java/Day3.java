@@ -41,13 +41,29 @@ public class Day3 extends Day {
     }
 
     private int getCo2ScrubberRating(String[] puzzleInput) {
-        List<String> list = getListOf(Arrays.asList(puzzleInput), 0, (countZeros, countOnes) -> countZeros > countOnes);
+        List<String> list = getListOfLessOccurs(puzzleInput);
         return Integer.parseInt(list.get(0), 2);
     }
 
     private int getOxygenGeneratorRating(String[] puzzleInput) {
-        List<String> list = getListOf(Arrays.asList(puzzleInput), 0, (countZeros, countOnes) -> countZeros > countOnes);
+        List<String> list = getListOfMostOccurs(puzzleInput);
         return Integer.parseInt(list.get(0), 2);
+    }
+
+    private List<String> getListOfMostOccurs(String[] list) {
+        return getListOfMostOccurs(Arrays.asList(list), 0);
+    }
+
+    private List<String> getListOfLessOccurs(String[] list) {
+        return getListOfLessOccurs(Arrays.asList(list), 0);
+    }
+
+    private List<String> getListOfMostOccurs(List<String> list, int position) {
+        return getListOf(list, position, (countZeros, countOnes) -> countZeros > countOnes);
+    }
+
+    private List<String> getListOfLessOccurs(List<String> list, int position) {
+        return getListOf(list, position, (countZeros, countOnes) -> countZeros <= countOnes);
     }
 
     private List<String> getListOf(List<String> list, int position, ListFilter listFilter) {
