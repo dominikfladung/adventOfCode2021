@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Day3 extends Day {
     @Override
     int part1(String[] puzzleInput) {
@@ -19,8 +23,10 @@ public class Day3 extends Day {
         for (int i = 0; i < charLength; i++) {
             if (zeros[i] > Math.floor(puzzleInput.length / 2)) {
                 gammaRate.append("0");
+                epsilonRate.append("1");
             } else {
                 gammaRate.append("1");
+                epsilonRate.append("0");
             }
         }
         
@@ -29,7 +35,69 @@ public class Day3 extends Day {
 
     @Override
     int part2(String[] puzzleInput) {
-        return 0;
+        int oxygenGeneratorRating = getOxygenGeneratorRating(puzzleInput);
+        int co2ScrubberRating = getCo2ScrubberRating(puzzleInput);
+        return oxygenGeneratorRating * co2ScrubberRating;
+    }
+
+    private int getCo2ScrubberRating(String[] puzzleInput) {
+        List<String> list = getListOfLessOccurs(puzzleInput);
+        return Integer.parseInt(list.get(0), 2);
+    }
+
+    private int getOxygenGeneratorRating(String[] puzzleInput) {
+        List<String> list = getListOfMostOccurs(puzzleInput);
+        return Integer.parseInt(list.get(0), 2);
+    }
+
+    private List<String> getListOfMostOccurs(String[] list) {
+        return getListOfMostOccurs(Arrays.asList(list), 0);
+    }
+
+    private List<String> getListOfLessOccurs(String[] list) {
+        return getListOfLessOccurs(Arrays.asList(list), 0);
+    }
+
+    private List<String> getListOfMostOccurs(List<String> list, int position) {
+        List<String> numbersWithZerosAtCurrentPosition = new ArrayList<String>();
+        List<String> numbersWithOnesAtCurrentPosition = new ArrayList<String>();
+
+        for (int i = 0; i < list.size(); i++) {
+            char number = list.get(i).charAt(position);
+            if (number == '0') {
+                numbersWithZerosAtCurrentPosition.add(list.get(i));
+            } else {
+                numbersWithOnesAtCurrentPosition.add(list.get(i));
+            }
+        }
+
+        List<String> nextList = numbersWithZerosAtCurrentPosition.size() > numbersWithOnesAtCurrentPosition.size() ? numbersWithZerosAtCurrentPosition : numbersWithOnesAtCurrentPosition;
+        if(nextList.size() == 1) {
+            return nextList;
+        } else {
+            return getListOfMostOccurs(nextList, position + 1);
+        }
+    }
+
+    private List<String> getListOfLessOccurs(List<String> list, int position) {
+        List<String> numbersWithZerosAtCurrentPosition = new ArrayList<String>();
+        List<String> numbersWithOnesAtCurrentPosition = new ArrayList<String>();
+
+        for (int i = 0; i < list.size(); i++) {
+            char number = list.get(i).charAt(position);
+            if (number == '0') {
+                numbersWithZerosAtCurrentPosition.add(list.get(i));
+            } else {
+                numbersWithOnesAtCurrentPosition.add(list.get(i));
+            }
+        }
+
+        List<String> nextList = numbersWithZerosAtCurrentPosition.size() <= numbersWithOnesAtCurrentPosition.size() ? numbersWithZerosAtCurrentPosition : numbersWithOnesAtCurrentPosition;
+        if(nextList.size() == 1) {
+            return nextList;
+        } else {
+            return getListOfLessOccurs(nextList, position + 1);
+        }
     }
 
     public static void main(String[] args) {
