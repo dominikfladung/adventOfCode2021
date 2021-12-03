@@ -29,7 +29,7 @@ public class Day3 extends Day {
                 epsilonRate.append("0");
             }
         }
-        
+
         return Integer.parseInt(gammaRate.toString(), 2) * Integer.parseInt(epsilonRate.toString(), 2);
     }
 
@@ -41,66 +41,43 @@ public class Day3 extends Day {
     }
 
     private int getCo2ScrubberRating(String[] puzzleInput) {
-        List<String> list = getListOfLessOccurs(puzzleInput);
+        List<String> list = getListOf(Arrays.asList(puzzleInput), 0, (countZeros, countOnes) -> countZeros > countOnes);
         return Integer.parseInt(list.get(0), 2);
     }
 
     private int getOxygenGeneratorRating(String[] puzzleInput) {
-        List<String> list = getListOfMostOccurs(puzzleInput);
+        List<String> list = getListOf(Arrays.asList(puzzleInput), 0, (countZeros, countOnes) -> countZeros > countOnes);
         return Integer.parseInt(list.get(0), 2);
     }
 
-    private List<String> getListOfMostOccurs(String[] list) {
-        return getListOfMostOccurs(Arrays.asList(list), 0);
-    }
-
-    private List<String> getListOfLessOccurs(String[] list) {
-        return getListOfLessOccurs(Arrays.asList(list), 0);
-    }
-
-    private List<String> getListOfMostOccurs(List<String> list, int position) {
-        List<String> numbersWithZerosAtCurrentPosition = new ArrayList<String>();
-        List<String> numbersWithOnesAtCurrentPosition = new ArrayList<String>();
+    private List<String> getListOf(List<String> list, int position, ListFilter listFilter) {
+        List<String> numbersWithZeros = new ArrayList<String>();
+        List<String> numbersWithOnes = new ArrayList<String>();
 
         for (int i = 0; i < list.size(); i++) {
             char number = list.get(i).charAt(position);
             if (number == '0') {
-                numbersWithZerosAtCurrentPosition.add(list.get(i));
+                numbersWithZeros.add(list.get(i));
             } else {
-                numbersWithOnesAtCurrentPosition.add(list.get(i));
+                numbersWithOnes.add(list.get(i));
             }
         }
 
-        List<String> nextList = numbersWithZerosAtCurrentPosition.size() > numbersWithOnesAtCurrentPosition.size() ? numbersWithZerosAtCurrentPosition : numbersWithOnesAtCurrentPosition;
-        if(nextList.size() == 1) {
+        int countZeros = numbersWithZeros.size();
+        int countOnes = numbersWithOnes.size();
+        List<String> nextList = listFilter.filter(countZeros, countOnes) ? numbersWithZeros : numbersWithOnes;
+        if (nextList.size() == 1) {
             return nextList;
         } else {
-            return getListOfMostOccurs(nextList, position + 1);
-        }
-    }
-
-    private List<String> getListOfLessOccurs(List<String> list, int position) {
-        List<String> numbersWithZerosAtCurrentPosition = new ArrayList<String>();
-        List<String> numbersWithOnesAtCurrentPosition = new ArrayList<String>();
-
-        for (int i = 0; i < list.size(); i++) {
-            char number = list.get(i).charAt(position);
-            if (number == '0') {
-                numbersWithZerosAtCurrentPosition.add(list.get(i));
-            } else {
-                numbersWithOnesAtCurrentPosition.add(list.get(i));
-            }
-        }
-
-        List<String> nextList = numbersWithZerosAtCurrentPosition.size() <= numbersWithOnesAtCurrentPosition.size() ? numbersWithZerosAtCurrentPosition : numbersWithOnesAtCurrentPosition;
-        if(nextList.size() == 1) {
-            return nextList;
-        } else {
-            return getListOfLessOccurs(nextList, position + 1);
+            return getListOf(nextList, position + 1, listFilter);
         }
     }
 
     public static void main(String[] args) {
         new Day3().run(3);
+    }
+
+    interface ListFilter {
+        boolean filter(int countZeros, int countOnes);
     }
 }
