@@ -2,7 +2,7 @@ public class Day1 extends Day {
     @Override
     int part1(String[] puzzleInput) {
         int counter = 0;
-        int[] numbers = ToInt(puzzleInput);
+        int[] numbers = toInt(puzzleInput);
 
         for (int i = 1; i < numbers.length; i++) {
             if (numbers[i] > numbers[i - 1]) {
@@ -16,7 +16,7 @@ public class Day1 extends Day {
     @Override
     int part2(String[] puzzleInput) {
         int counter = 0;
-        int[] numbers = ToInt(puzzleInput);
+        int[] numbers = toInt(puzzleInput);
 
         for (int i = 0; i < numbers.length - 3; i++) {
             int overlap = numbers[i + 1] + numbers[i + 2];

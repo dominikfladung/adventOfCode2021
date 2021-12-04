@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
@@ -29,7 +30,7 @@ public abstract class Day {
         return lines.toArray(new String[lines.size()]);
     }
 
-    protected int[] ToInt(String[] array) {
+    protected int[] toInt(String[] array) {
         int[] result = new int[array.length];
         for (int i = 0; i < result.length; i++) {
             result[i] = Integer.parseInt(array[i]);
@@ -37,9 +38,13 @@ public abstract class Day {
         return result;
     }
 
+    protected String[] filterEmptyRows(String[] array) {
+        return Arrays.stream(array).filter(x -> !x.trim().isEmpty()).toArray(String[]::new);
+    }
+
     protected void run(int day) {
         try {
-            String[] puzzleInput = readFile("./../puzzle_input/" + day + ".txt");
+            String[] puzzleInput = readFile("./puzzle_input/" + day + ".txt");
             System.out.println("Day: " + day);
             ExecutorService executorService = Executors.newFixedThreadPool(2);
             Future<Integer> futurePart1 = executorService.submit(() -> this.part1(puzzleInput));

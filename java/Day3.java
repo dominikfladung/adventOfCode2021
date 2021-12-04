@@ -29,7 +29,7 @@ public class Day3 extends Day {
                 epsilonRate.append("0");
             }
         }
-
+        
         return Integer.parseInt(gammaRate.toString(), 2) * Integer.parseInt(epsilonRate.toString(), 2);
     }
 
