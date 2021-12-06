@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -44,7 +43,7 @@ public abstract class Day {
 
     protected void run(int day) {
         try {
-            String[] puzzleInput = readFile("./../puzzle_input/" + day + ".txt");
+            String[] puzzleInput = readFile("./puzzle_input/" + day + ".txt");
             System.out.println("Day: " + day);
             ExecutorService executorService = Executors.newFixedThreadPool(2);
             Future<Integer> futurePart1 = executorService.submit(() -> this.part1(puzzleInput));
