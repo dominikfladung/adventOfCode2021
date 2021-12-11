@@ -43,7 +43,7 @@ public abstract class Day {
 
     protected void run(int day) {
         try {
-            String[] puzzleInput = readFile("./../puzzle_input/" + day + ".txt");
+            String[] puzzleInput = readFile("./puzzle_input/" + day + ".txt");
             System.out.println("Day: " + day);
             ExecutorService executorService = Executors.newFixedThreadPool(2);
             Future<Integer> futurePart1 = executorService.submit(() -> this.part1(puzzleInput));
