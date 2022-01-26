@@ -11,7 +11,7 @@ public class Day13 extends Day {
         var coordinates = getCoordinates(puzzleInput, emptyRowPosition);
         var foldings = getFoldings(puzzleInput, emptyRowPosition);
         var map = new Map(coordinates);
-        //map.print();
+        // map.print();
         map = map.fold(foldings[0]);
 
         return map.countMarkedFields();
@@ -35,23 +35,14 @@ public class Day13 extends Day {
         var coordinates = getCoordinates(puzzleInput, emptyRowPosition);
         var foldings = getFoldings(puzzleInput, emptyRowPosition);
         var map = new Map(coordinates);
-       // map.print();
+        // map.print();
 
-        for(var fold : foldings) {
+        for (var fold : foldings) {
             map = map.fold(fold);
-          //  map.print();
+            // map.print();
         }
         map.print();
         return map.countMarkedFields();
-    }
-
-    private int getEmptyRowPosition(String[] puzzleInput) {
-        for (int i = 0; i < puzzleInput.length; i++) {
-            if (puzzleInput[i].isEmpty()) {
-                return i;
-            }
-        }
-        return -1;
     }
 
     private class Map {
@@ -59,8 +50,8 @@ public class Day13 extends Day {
 
         public Map(int x, int y) {
             this.fields = new Boolean[y][x];
-            for(int i = 0; i < y; i++) {
-                for(int j = 0; j < x; j++) {
+            for (int i = 0; i < y; i++) {
+                for (int j = 0; j < x; j++) {
                     this.fields[i][j] = false;
                 }
             }
@@ -77,7 +68,8 @@ public class Day13 extends Day {
         public Map fold(Folding folding) {
             int mapX, mapY;
             boolean isFoldLeft = folding.type == Folding.Type.FOLD_LEFT;
-            if(isFoldLeft) {
+
+            if (isFoldLeft) {
                 mapX = folding.value;
                 mapY = this.fields.length;
             } else {
@@ -86,16 +78,10 @@ public class Day13 extends Day {
             }
 
             var newMap = new Map(mapX, mapY);
-            
-            for(int y = 0; y < mapY; y++) {
-                for(int x = 0; x < mapX; x++) {
-                    newMap.fields[y][x] = this.fields[y][x];
-                }
-            }
 
-            for(int y = 0; y < mapY; y++) {
-                for(int x = 0; x < mapX; x++) {
-                    Boolean isNewFieldSet = newMap.fields[y][x];
+            for (int y = 0; y < mapY; y++) {
+                for (int x = 0; x < mapX; x++) {
+                    Boolean isNewFieldSet = this.fields[y][x];
                     int mirrorY = !isFoldLeft ? this.fields.length - y - 1 : y;
                     int mirrorX = isFoldLeft ? this.fields[0].length - x - 1 : x;
                     newMap.fields[y][x] = isNewFieldSet ? isNewFieldSet : this.fields[mirrorY][mirrorX];
@@ -107,9 +93,9 @@ public class Day13 extends Day {
 
         public int countMarkedFields() {
             int count = 0;
-            for(var field : this.fields) {
-                for(var fieldValue : field) {
-                    if(fieldValue) {
+            for (var field : this.fields) {
+                for (var fieldValue : field) {
+                    if (fieldValue) {
                         count++;
                     }
                 }
@@ -131,7 +117,7 @@ public class Day13 extends Day {
         private static int getMaxX(Coordinate[] coordinates) {
             return Arrays.stream(coordinates).mapToInt(c -> c.x).max().orElse(0);
         }
-    
+
         private static int getMaxY(Coordinate[] coordinates) {
             return Arrays.stream(coordinates).mapToInt(c -> c.y).max().orElse(0);
         }
@@ -159,7 +145,6 @@ public class Day13 extends Day {
     private class Coordinate {
         int x;
         int y;
-        boolean isMarked = false;
 
         public Coordinate(String input) {
             var split = input.split(",");

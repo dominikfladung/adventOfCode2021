@@ -41,6 +41,16 @@ public abstract class Day {
         return Arrays.stream(array).filter(x -> !x.trim().isEmpty()).toArray(String[]::new);
     }
 
+
+    protected int getEmptyRowPosition(String[] puzzleInput) {
+        for (int i = 0; i < puzzleInput.length; i++) {
+            if (puzzleInput[i].isEmpty()) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     protected void run(int day) {
         try {
             String[] puzzleInput = readFile("./puzzle_input/" + day + ".txt");
