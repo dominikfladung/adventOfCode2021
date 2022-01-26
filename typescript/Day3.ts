@@ -87,4 +87,6 @@ interface ListFilter {
     (countZeros: number, countOnes: number): boolean;
 }
 
-new Day3().run(3);
+//new Day3().run(3);
+
+export default Day3;

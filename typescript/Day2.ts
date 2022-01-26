@@ -46,4 +46,6 @@ class Day2 extends BaseDay {
     }
 }
 
-new Day2().run(2);
+//new Day2().run(2);
+
+export default Day2;

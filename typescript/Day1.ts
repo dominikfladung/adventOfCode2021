@@ -2,7 +2,7 @@ import { BaseDay } from "./BaseDay";
 
 class Day1 extends BaseDay {
     part1(puzzleInput: string[]): string {
-        const puzzleInputAsNumber = this.toInt(puzzleInput);
+        const puzzleInputAsNumber: Array<number> = this.toInt(puzzleInput);
         let increaseCounter = 0;
         let lastInput: number = puzzleInputAsNumber[0];
 
@@ -34,4 +34,6 @@ class Day1 extends BaseDay {
     }
 }
 
-new Day1().run(1);
+//new Day1().run(1);
+
+export default Day1;
