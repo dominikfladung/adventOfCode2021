@@ -2,8 +2,8 @@ import { BaseDay } from "./BaseDay";
 
 class Day1 extends BaseDay {
     part1(puzzleInput: string[]): string {
+        const puzzleInputAsNumber = this.toInt(puzzleInput);
         let increaseCounter = 0;
-        let puzzleInputAsNumber = this.toInt(puzzleInput);
         let lastInput: number = puzzleInputAsNumber[0];
 
         puzzleInputAsNumber.forEach(function (input) {
@@ -17,13 +17,13 @@ class Day1 extends BaseDay {
     }
 
     part2(puzzleInput: string[]): string {
+        const puzzleInputAsNumber = this.toInt(puzzleInput);
         let increaseCounter = 0;
-        let puzzleInputAsNumber = this.toInt(puzzleInput);
 
         for (let i = 0; i < puzzleInputAsNumber.length - 3; i++) {
-            let overlap = puzzleInputAsNumber[i + 1] + puzzleInputAsNumber[i + 2];
-            let current = puzzleInputAsNumber[i] + overlap;
-            let next = overlap + puzzleInputAsNumber[i + 3];
+            const overlap = puzzleInputAsNumber[i + 1] + puzzleInputAsNumber[i + 2];
+            const current = puzzleInputAsNumber[i] + overlap;
+            const next = overlap + puzzleInputAsNumber[i + 3];
 
             if (next > current) {
                 increaseCounter++;

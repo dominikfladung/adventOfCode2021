@@ -6,9 +6,9 @@ class Day2 extends BaseDay {
         let horizontalPosition = 0;
 
         puzzleInput.forEach(line => {
-            let split = line.split(" ");
-            let units = parseInt(split[1]);
-            let direction = split[0].trim();
+            const split = line.split(" ");
+            const units = parseInt(split[1]);
+            const direction = split[0].trim();
 
             if (direction === "forward") {
                 horizontalPosition += units;
@@ -28,9 +28,9 @@ class Day2 extends BaseDay {
         let aim = 0;
 
         puzzleInput.forEach(line => {
-            let split = line.split(" ");
-            let units = parseInt(split[1]);
-            let direction = split[0].trim();
+            const split = line.split(" ");
+            const units = parseInt(split[1]);
+            const direction = split[0].trim();
 
             if (direction === "forward") {
                 horizontalPosition += units;

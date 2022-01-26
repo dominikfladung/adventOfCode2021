@@ -2,15 +2,15 @@ import { BaseDay } from "./BaseDay";
 
 class Day3 extends BaseDay {
     part1(puzzleInput: string[]): string {
-        let length = puzzleInput[0].length;
-        let zeros: Array<number> = [];
+        const length = puzzleInput[0].length;
+        const zeros: Array<number> = [];
 
         let gammaRate = "";
         let epsilonRate = "";
 
         for (let i = 0; i < puzzleInput.length; i++) {
             for (let j = 0; j < length; j++) {
-                let number = puzzleInput[i][j];
+                const number = puzzleInput[i][j];
                 if (number == '0') {
                     if (zeros[j]) {
                         zeros[j]++;
@@ -35,18 +35,18 @@ class Day3 extends BaseDay {
     }
 
     part2(puzzleInput: string[]): string {
-        let oxygenGeneratorRating = this.getOxygenGeneratorRating(puzzleInput);
-        let co2ScrubberRating = this.getCo2ScrubberRating(puzzleInput);
+        const oxygenGeneratorRating = this.getOxygenGeneratorRating(puzzleInput);
+        const co2ScrubberRating = this.getCo2ScrubberRating(puzzleInput);
         return (oxygenGeneratorRating * co2ScrubberRating).toString();
     }
 
     getCo2ScrubberRating(puzzleInput: Array<string>) {
-        let list: Array<string> = this.getListOfLessOccurs(puzzleInput);
+        const list: Array<string> = this.getListOfLessOccurs(puzzleInput);
         return parseInt(list[0], 2);
     }
 
     getOxygenGeneratorRating(puzzleInput: Array<string>) {
-        let list: Array<string> = this.getListOfMostOccurs(puzzleInput);
+        const list: Array<string> = this.getListOfMostOccurs(puzzleInput);
         return parseInt(list[0], 2);
     }
 
@@ -59,11 +59,11 @@ class Day3 extends BaseDay {
     }
 
     getListOf(list: Array<string>, position: number, listFilter: ListFilter): Array<string> {
-        let numbersWithZeros: Array<string> = [];
-        let numbersWithOnes: Array<string> = [];
+        const numbersWithZeros: Array<string> = [];
+        const numbersWithOnes: Array<string> = [];
 
         for (let i = 0; i < list.length; i++) {
-            let number = list[i][position];
+            const number = list[i][position];
             if (number == '0') {
                 numbersWithZeros.push(list[i]);
             } else {
@@ -71,9 +71,9 @@ class Day3 extends BaseDay {
             }
         }
 
-        let countZeros = numbersWithZeros.length;
-        let countOnes = numbersWithOnes.length;
-        let nextList: Array<string> = listFilter(countZeros, countOnes) ? numbersWithZeros : numbersWithOnes;
+        const countZeros = numbersWithZeros.length;
+        const countOnes = numbersWithOnes.length;
+        const nextList: Array<string> = listFilter(countZeros, countOnes) ? numbersWithZeros : numbersWithOnes;
 
         if (nextList.length == 1) {
             return nextList;
