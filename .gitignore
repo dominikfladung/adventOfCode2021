@@ -1,4 +1,4 @@
 *.class
 node_modules/
 cypress/videos/
-crypress/screenshots/
+cypress/screenshots/
