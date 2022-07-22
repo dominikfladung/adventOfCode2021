@@ -2,19 +2,14 @@ namespace AdventOfCode;
 
 public class Day1 : Day
 {
-    protected override int GetDayIndex()
+    public override int Part1(string[] puzzleInput)
     {
-        return 1;
-    }
-
-    public override int Part1()
-    {
-        var puzzleInput = this.GetNumericPuzzleInput();
+        var rows = ToInt(puzzleInput);
         var increaseCounter = 0;
 
-        for (var i = 1; i < puzzleInput.Length; i++)
+        for (var i = 1; i < rows.Length; i++)
         {
-            if(puzzleInput[i - 1] < puzzleInput[i])
+            if(rows[i - 1] < rows[i])
             {
                 increaseCounter++;
             }
@@ -23,15 +18,15 @@ public class Day1 : Day
         return increaseCounter;
     }
 
-    public override int Part2()
+    public override int Part2(string[] puzzleInput)
     {
-        var puzzleInput = this.GetNumericPuzzleInput();
+        var rows = ToInt(puzzleInput);
         var increaseCounter = 0;
 
-        var firstSlice = SumSlice(0, 3, puzzleInput);
+        var firstSlice = SumSlice(0, 3, rows);
         for (var i = 0; i < puzzleInput.Length; i++)
         {
-            var secondSlice = SumSlice(i + 1, 3, puzzleInput);
+            var secondSlice = SumSlice(i + 1, 3, rows);
             if(firstSlice < secondSlice)
             {
                 increaseCounter++;

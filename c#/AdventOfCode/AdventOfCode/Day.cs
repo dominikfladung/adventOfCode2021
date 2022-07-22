@@ -2,25 +2,23 @@ namespace AdventOfCode;
 
 public abstract class Day
 {
-    protected abstract int GetDayIndex();
-    public abstract int Part1();
-    public abstract int Part2();
+    public abstract int Part1(string[] puzzleInput);
+    public abstract int Part2(string[] puzzleInput);
+
+    public static string[] GetPuzzleInput(string fileName)
+    {
+        var path = "\\../../../../../../../../puzzle_input/" + fileName;
+        var fullPath = Path.Combine(Directory.GetCurrentDirectory(), path);
+        return File.ReadAllLines(fullPath);
+    }
+
+    protected int[] ToInt(string[] array)
+    {
+        return Array.ConvertAll(array, int.Parse);
+    }
     
-    public void Run()
+    protected int BinaryToInt(string binaryString)
     {
-        Console.WriteLine(this.GetType().Name);
-        Console.WriteLine("Part 1: " + this.Part1());
-        Console.WriteLine("Part 2: " + this.Part2());
-    }
-
-    protected string[] GetPuzzleInput()
-    {
-        var fileName = Path.Combine(Directory.GetCurrentDirectory(), "\\../../../../../../../../puzzle_input/" + this.GetDayIndex() + ".txt");
-        return File.ReadAllLines(fileName);
-    }
-
-    protected int[] GetNumericPuzzleInput()
-    {
-        return Array.ConvertAll(this.GetPuzzleInput(), int.Parse);
+        return Convert.ToInt32(binaryString, 2);
     }
 }
